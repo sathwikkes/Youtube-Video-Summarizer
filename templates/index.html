@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Summarizer</title>
+</head>
+<body>
+    <h1>Video Summarizer</h1>
+    <form id="summarizeForm">
+        <label for="videoUrl">YouTube Video URL:</label>
+        <input type="text" id="videoUrl" name="videoUrl" required>
+        <button type="button" onclick="summarizeVideo()">Summarize</button>
+    </form>
+    <div id="summaryResult"></div>
+
+    <script>
+        function summarizeVideo() {
+            const videoUrl = document.getElementById('videoUrl').value;
+
+            fetch('/summarize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ video_url: videoUrl }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('summaryResult').innerText = data.summary;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('summaryResult').innerText = 'An error occurred.';
+            });
+        }
+    </script>
+</body>
+</html>

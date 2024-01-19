@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Summarizer</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <h1>Video Summarizer</h1>
@@ -12,28 +13,10 @@
         <input type="text" id="videoUrl" name="videoUrl" required>
         <button type="button" onclick="summarizeVideo()">Summarize</button>
     </form>
+    <h2 id="videoTitle"></h2>
     <div id="summaryResult"></div>
+    <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
 
-    <script>
-        function summarizeVideo() {
-            const videoUrl = document.getElementById('videoUrl').value;
-
-            fetch('/summarize', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ video_url: videoUrl }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('summaryResult').innerText = data.summary;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('summaryResult').innerText = 'An error occurred.';
-            });
-        }
-    </script>
+    
 </body>
 </html>

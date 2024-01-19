@@ -21,4 +21,4 @@ Key Features:
 - Generate concise, informative summaries using advanced summarization algorithms.
 - Save time and effort by digesting video content efficiently.
 
-![Basic Version](basic-example.png)
+![Summary Output](video-summary-output.png)
